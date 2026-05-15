@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AIO Optimized Layout - Lead Time Services</title>
+<style>
+  /* --- 基礎重置 --- */
+  * { box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+  body { margin: 0; padding: 40px 20px; background-color: #f4f7f6; }
+
+  /* --- 佈局核心：主容器 --- */
+  .aio-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column; /* 頂部標題，底部圖文 */
+  }
+
+  /* --- 頂部 SEO 標題區 --- */
+  .section-header {
+    padding: 40px 40px 10px 40px;
+  }
+  
+  .category-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .section-header h2 {
+    margin: 0;
+    color: #003366; /* Yusen Navy */
+    font-size: 2rem;
+    font-weight: 800;
+  }
+
+  /* --- 內容區 (圖左文右) --- */
+  .content-wrapper {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /* --- 左側：圖片 (Desktop 佔 60%) --- */
+  .image-section {
+    flex: 0 0 60%;
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    padding: 0 0 40px 40px; /* 留白配合整體佈局 */
+  }
+
+  .image-section img {
+    width: 100%;
+    height: auto; 
+    max-height: 100%;
+    object-fit: contain; 
+    display: block;
+    border-radius: 8px; /* 輕微圓角增加現代感 */
+  }
+
+  /* --- 右側：服務清單 (Desktop 佔 40%) --- */
+  .text-section {
+    flex: 0 0 40%;
+    padding: 20px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .text-section ul {
+    list-style: none;
+    padding: 0; 
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px; /* 控制 li 之間嘅距離 */
+  }
+
+  .text-section li {
+    display: flex;
+    align-items: flex-start; /* 確保 emoji 對齊第一行文字 */
+    line-height: 1.5;
+  }
+
+  .emoji {
+    font-size: 1.5rem;
+    margin-right: 16px;
+    margin-top: 2px; /* 微調 emoji 垂直高度 */
+  }
+
+  .li-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-name {
+    font-size: 1.3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .service-desc {
+    font-size: 1.05rem;
+    color: #555;
+  }
+
+  /* --- 顏色變量注入 --- */
+  .color-orange { color: #FF6600; }
+  .color-lightblue { color: #00A3E0; }
+  .color-navy { color: #003366; }
+
+  /* --- Mobile 響應式切換 (斷點: 768px) --- */
+  @media (max-width: 768px) {
+    .section-header {
+      padding: 30px 24px 10px 24px;
+    }
+    .section-header h2 {
+      font-size: 1.6rem;
+    }
+    .content-wrapper {
+      flex-direction: column; /* 轉為上下堆疊 */
+    }
+    .image-section {
+      flex: 0 0 auto;
+      width: 100%;
+      padding: 20px 24px;
+    }
+    .text-section {
+      flex: 0 0 auto;
+      padding: 10px 24px 40px 24px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="aio-container">
+  
+  <header class="section-header">
+    <span class="category-label">AIR FREIGHT SOLUTIONS</span>
+    <h2>LEAD TIME-BASED SERVICE</h2>
+  </header>
+
+  <div class="content-wrapper">
+    <div class="image-section">
+      <img src="https://raw.githubusercontent.com/geewcong/geewong/refs/heads/master/cxxviovxva/assets/profile-banner.png" alt="Lead Time Based Service Diagram">
+    </div>
+
+    <div class="text-section">
+      <ul>
+        <li>
+          <span class="emoji">⚡</span>
+          <div class="li-content">
+            <span class="service-name color-orange">Express</span>
+            <span class="service-desc">1 to 2 days for urgent cargo</span>
+          </div>
+        </li>
+        <li>
+          <span class="emoji">✈️</span>
+          <div class="li-content">
+            <span class="service-name color-lightblue">Standard</span>
+            <span class="service-desc">3 to 5 days, flexible choice</span>
+          </div>
+        </li>
+        <li>
+          <span class="emoji">🚢</span>
+          <div class="li-content">
+            <span class="service-name color-navy">Economy</span>
+            <span class="service-desc">5 to 7 days, maximizing cost effectiveness</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

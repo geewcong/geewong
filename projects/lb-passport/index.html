@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oktoberfest Passport · Long Bridge Café</title>
+<meta name="description" content="Three floors, three stamps, one drink on us. Oktoberfest 16–18 Oct 2026 at Long Bridge Café, Tsim Sha Tsui.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:oklch(25% .035 50);
+  --ink-soft:oklch(38% .03 50);
+  --paper:oklch(96.5% .012 85);
+  --card:oklch(99% .006 85);
+  --line:oklch(88% .015 75);
+  --amber:oklch(50% .13 45);
+  --amber-deep:oklch(42% .12 40);
+  --gold:oklch(72% .13 75);
+  --deep:oklch(33% .06 45);
+  --ok:oklch(50% .12 145);
+  --err:oklch(52% .16 25);
+  --radius:14px;
+  --shadow:0 1px 2px oklch(25% .035 50 / .06),0 8px 24px oklch(25% .035 50 / .07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:"Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.55;min-height:100vh;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(60rem 30rem at 110% -10%, oklch(72% .13 75 /.12), transparent 60%),
+    radial-gradient(50rem 28rem at -20% 110%, oklch(50% .13 45 /.08), transparent 60%);}
+.frame{max-width:520px;margin:0 auto;padding:0 20px 64px}
+.brand{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:18px 0 6px}
+.brand .marks{display:flex;gap:8px;align-items:center}
+.mark{font-size:11px;letter-spacing:.14em;font-weight:700;text-transform:uppercase;
+  border:1.5px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--ink-soft);background:var(--card)}
+.brand .kick{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-deep);font-weight:700}
+h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:clamp(34px,9vw,44px);line-height:1.06;letter-spacing:-.01em;margin:.4em 0 .35em}
+.kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-deep);font-weight:700}
+.lead{font-size:16.5px;color:var(--ink-soft);max-width:34ch}
+.zh{font-family:-apple-system,"PingFang HK","Microsoft JhengHei",sans-serif;font-size:.82em;color:var(--ink-soft)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 18px 16px;margin-top:18px}
+.row{display:flex;gap:12px;align-items:center}
+.between{display:flex;gap:12px;align-items:center;justify-content:space-between}
+/* passport */
+.pass{display:flex;gap:10px;align-items:stretch;justify-content:space-between;margin:6px 0 2px}
+.seal{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0}
+.seal .disc{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:15px;letter-spacing:.06em;
+  border:2px dashed oklch(80% .03 70);color:oklch(65% .04 70);background:transparent;transition:.3s}
+.seal.done .disc{border:none;background:radial-gradient(circle at 32% 28%, var(--gold), var(--amber) 70%);
+  color:oklch(20% .04 45);box-shadow:inset 0 0 0 2.5px oklch(96% .02 80 / .8), inset 0 0 0 6px oklch(50% .13 45 / .35), var(--shadow);
+  transform:rotate(-6deg)}
+.seal .floor{font-size:10.5px;letter-spacing:.12em;font-weight:700;color:var(--ink-soft);text-transform:uppercase;text-align:center}
+.seal.done .floor{color:var(--amber-deep)}
+.seal .now{font-size:10px;color:var(--amber-deep);font-weight:700;letter-spacing:.08em}
+.prog{font-size:13px;color:var(--ink-soft);margin-top:8px}
+.prog b{color:var(--ink)}
+/* buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:52px;
+  border:none;border-radius:12px;font:inherit;font-weight:700;font-size:16.5px;cursor:pointer;
+  background:var(--amber);color:oklch(98% .01 85);box-shadow:0 6px 18px oklch(42% .12 40/.28);transition:.15s}
+.btn:active{transform:translateY(1px)}
+.btn.ghost{background:transparent;color:var(--amber-deep);box-shadow:none;border:1.5px solid var(--line)}
+.btn.small{min-height:44px;font-size:14.5px}
+.cta{margin-top:16px}
+/* steps + floors */
+.steps{counter-reset:st}
+.step{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.step:last-child{border-bottom:none}
+.step::before{counter-increment:st;content:counter(st);font-family:"Fraunces",serif;font-weight:700;
+  font-size:20px;color:var(--amber);min-width:1.2em}
+.step div{font-size:15px;color:var(--ink-soft)}
+.step b{color:var(--ink);display:block;font-size:15.5px}
+table.floors{width:100%;border-collapse:collapse;font-size:14.5px}
+table.floors td{padding:11px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+table.floors tr:last-child td{border-bottom:none}
+.fc{font-weight:700;color:var(--amber-deep);letter-spacing:.08em;font-size:12px;white-space:nowrap;padding-right:12px;padding-top:13px}
+.fn{font-weight:700}
+.fd{color:var(--ink-soft);font-size:13.5px}
+.note{font-size:12.5px;color:var(--ink-soft)}
+.reward{display:flex;gap:12px;align-items:center;background:linear-gradient(120deg, oklch(97% .03 80), oklch(94% .04 70));
+  border:1px solid oklch(86% .05 75);border-radius:var(--radius);padding:14px 16px;margin-top:18px}
+.reward .mug{font-family:"Fraunces",serif;font-size:26px;line-height:1}
+.reward b{display:block;font-size:15px}
+.reward span{font-size:13px;color:var(--ink-soft)}
+.foot{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-soft)}
+.foot .lgl{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+/* station quiz */
+.zonechip{display:inline-flex;gap:8px;align-items:center;font-size:12px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--amber-deep);border:1.5px solid oklch(85% .04 65);border-radius:999px;padding:5px 12px;background:var(--card)}
+.q{font-family:"Fraunces",serif;font-weight:600;font-size:26px;line-height:1.2;margin:14px 0 4px}
+.opts{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.opt{position:relative;display:block;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:16px 16px 14px;min-height:64px;transition:.12s}
+.opt:hover{border-color:var(--amber)}
+.opt .tag{position:absolute;top:-9px;right:14px;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--deep);color:var(--gold);border-radius:999px;padding:2.5px 10px}
+.opt .en{font-weight:700;font-size:16.5px;display:block}
+.opt .zh{font-size:13px;color:var(--ink-soft)}
+/* stamp animation */
+.thud{position:fixed;inset:0;display:grid;place-items:center;pointer-events:none;z-index:50}
+.thud .disc{width:150px;height:150px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:26px;
+  background:radial-gradient(circle at 32% 28%, var(--gold), var(--amber) 70%);color:oklch(20% .04 45);
+  box-shadow:inset 0 0 0 5px oklch(96% .02 80/.8), inset 0 0 0 12px oklch(50% .13 45/.3), 0 18px 40px oklch(30% .06 45/.35);
+  transform:rotate(-8deg) scale(2.2);opacity:0}
+.go .thud .disc{animation:thud .7s cubic-bezier(.2,1.4,.3,1) forwards}
+@keyframes thud{0%{transform:rotate(-20deg) scale(2.4);opacity:0}55%{transform:rotate(-7deg) scale(.94);opacity:1}100%{transform:rotate(-8deg) scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.go .thud .disc{animation:none;opacity:1;transform:rotate(-8deg) scale(1)}}
+.stamped-answer{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink-soft);margin-top:2px}
+.stamped-answer b{color:var(--ink)}
+/* form */
+.field{margin-top:16px}
+.field label{display:block;font-size:13px;font-weight:700;letter-spacing:.04em;margin-bottom:7px}
+.field input[type=text],.field input[type=tel],.field input[type=email]{
+  width:100%;min-height:50px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);
+  font:inherit;font-size:16px;padding:12px 14px;color:var(--ink)}
+.field input:focus{outline:none;border-color:var(--amber);box-shadow:0 0 0 3px oklch(50% .13 45/.15)}
+.ferr{font-size:12.5px;color:var(--err);margin-top:5px;display:none}
+.field.bad input{border-color:var(--err)}
+.field.bad .ferr{display:block}
+.seg{display:flex;gap:8px}
+.seg label{flex:1}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:flex;align-items:center;justify-content:center;min-height:46px;border:1.5px solid var(--line);
+  border-radius:11px;font-weight:700;font-size:14px;background:var(--card);cursor:pointer;transition:.12s}
+.seg input:checked+span{background:var(--deep);color:var(--gold);border-color:var(--deep)}
+.seg input:focus-visible+span{outline:2px solid var(--amber);outline-offset:2px}
+.consent{display:flex;gap:11px;margin-top:18px;cursor:pointer}
+.consent input{width:20px;height:20px;min-width:20px;margin-top:2px;accent-color:var(--amber)}
+.consent p{font-size:12.8px;color:var(--ink-soft)}
+.consent.bad p{color:var(--err)}
+/* coupon */
+.coupon{margin-top:18px;background:var(--deep);border-radius:16px;padding:24px 20px;text-align:center;color:oklch(95% .01 85);
+  box-shadow:var(--shadow);position:relative;overflow:hidden}
+.coupon::before,.coupon::after{content:"";position:absolute;width:26px;height:26px;border-radius:50%;background:var(--paper);top:50%;transform:translateY(-50%)}
+.coupon::before{left:-13px}.coupon::after{right:-13px}
+.coupon .lbl{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:700}
+.code{font-family:"Fraunces",serif;font-weight:700;font-size:58px;letter-spacing:.12em;line-height:1.15;margin:6px 0 2px;color:oklch(97% .02 85)}
+.coupon .sub{font-size:13px;color:oklch(80% .02 80)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chip{font-size:12px;font-weight:700;letter-spacing:.06em;border:1.5px solid oklch(85% .04 65);color:var(--amber-deep);
+  border-radius:999px;padding:4px 12px;background:var(--card)}
+.muted{font-size:12.5px;color:var(--ink-soft);margin-top:12px}
+/* staff + qr tools */
+.tool-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-top:4px}
+.tool-head .t{font-family:"Fraunces",serif;font-size:24px;font-weight:600}
+.toolnote{font-size:12.5px;color:var(--ink-soft);background:oklch(94% .02 80);border:1px dashed oklch(82% .03 70);
+  border-radius:10px;padding:10px 12px;margin-top:12px}
+.kv{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+.kv td{padding:7px 2px;border-bottom:1px solid var(--line);vertical-align:top}
+.kv tr:last-child td{border:none}
+.kv td:first-child{font-weight:700;white-space:nowrap;padding-right:14px;color:var(--ink-soft);font-size:12.5px;letter-spacing:.04em;text-transform:uppercase}
+.statbar{display:flex;align-items:center;gap:10px;font-size:13px;margin-top:6px}
+.statbar .bar{flex:1;height:8px;border-radius:99px;background:oklch(90% .02 75);overflow:hidden}
+.statbar .bar i{display:block;height:100%;background:var(--amber)}
+.statbar b{min-width:2.2em;text-align:right}
+.redeemed{color:var(--ok);font-weight:700}
+.qrbox{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.qrcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:center;box-shadow:var(--shadow)}
+.qrcard img,.qrcard .ph{width:100%;max-width:180px;aspect-ratio:1;border-radius:8px;margin:0 auto;display:block}
+.qrcard .ph{border:2px dashed var(--line);display:grid;place-items:center;font-size:11px;color:var(--ink-soft);padding:10px}
+.qrcard b{display:block;font-size:13.5px;margin-top:9px}
+.qrcard .u{display:block;font-size:10px;color:var(--ink-soft);word-break:break-all;margin-top:3px}
+.qrcard button{margin-top:9px}
+/* print standees */
+.printables{display:none}
+@media print{
+  body{background:#fff}
+  .frame,.no-print{display:none!important}
+  .printables{display:block}
+  .sheet{width:190mm;height:271mm;page-break-after:always;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:14mm;border:1px dashed #ccc}
+  .sheet .sh{font-family:"Fraunces",Georgia,serif;font-weight:700;font-size:30mm;line-height:1.05;text-align:center}
+  .sheet .sk{font-size:7mm;letter-spacing:3mm;text-transform:uppercase;color:#8a5a00;font-weight:700;text-align:center}
+  .sheet img{width:75mm;height:75mm}
+  .sheet .inst{font-size:5.2mm;text-align:center;line-height:1.7}
+  .sheet .inst b{font-size:6mm}
+  .sheet .ft{font-size:4.2mm;color:#666;text-align:center;letter-spacing:.5mm}
+  .sheet .fc2{font-size:26mm;font-weight:700;color:#8a5a00;letter-spacing:2mm}
+}
+.backline{display:flex;gap:8px;margin-top:14px}
+.view{display:none}
+.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+h2.sec{font-family:"Fraunces",serif;font-weight:600;font-size:21px;margin:26px 0 2px}
+a.plain{color:var(--amber-deep);font-weight:700;text-decoration:none;border-bottom:1.5px solid oklch(85% .05 70)}
+hr.sp{border:none;border-top:1px solid var(--line);margin:22px 0}
+</style>
+</head>
+<body>
+<script>/* auto-generated QR embed */
+const EMBEDDED_QR={"home": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/ToAAADEElEQVR42u2cXY6kMAyEreEAHImrcyQOgJRtEv+ygVmNVlpp9fHQommqH6KSXWU7kfbDaxeQIEGC/FvIQ/TajuXzZG3tc3d9bdddO9Of25vXe1/y0wvk/4W8OLQoQS4OdfoMIimvOptOfbb1Nw84BPLOoR5aRhxqwZL+7EOfQSSJAAWHQD5xaPDndL4sg03lDg6BfI1Dotrnylvjow09dBKHQP6RHup5q3kI6syRqpbQQyBnHMq+7JsPfBnIGYfKlVz+EEDdkl2ZTtZaFWBtQZZctvvXfe2kMYPv0Wc8c/EEh0BONHWnz1DXnrI+0cdKQz0O7SaP4BDImsuynE5KursxC0ta1zZhDYdAJg6pe1czb5ZM7w4PRl0o+XtwCGTxZZrG1qqfrX1mGUyLROQykFM9tFowGpTqP92KimL9DzQ1yIkekvBgq6cxL1FvUULyCiQcAnnLZUk1l4aHRql+FzmPXAZykstaS2bepZBGn6GuazeNtQWZOWTSWSQqQGHwU92x2XQRHAJZc5nqoWYWfqjmuKvFR/QQyGkcOiX6ZdGyjySn9SGXR3AIZPFlYc5iFMQC1Clh2PBlIB+9/VZr0qk6Ha0y+mUg33KZNs3czMuSbf0+QpCRi34ZyKm3P9N0RxSJbL/QKdHw0Io1awuyamrrx0tM53tzI48YRfWItQVZ4tAgTVh4089WaFzafQ8RHAL56MusqGgR6dT3Ig6Ry0BOOLSbdM4TsGvoIY9I9MtAzjikpivMvEYa73+Ezt5XZtBATvRQNO9zNyPxqh2Sdg5RHwL5xKE8araaKKpngeTd+KwtyMyhyGpZ+0hupKVZNfQQyBmHSmc+Rs3Ss/s5RawtyN+8vW3kEG2tShAp6tT0OkC+5LIQzKVbn7cn5qNBWFuQwaE42UN8ukPSNJptmF7S4VZwCGTlkKRz0Hz0foujhyQoJfTLQL5zSJ+6G9tTGssVazgEcsqhehCsn8eoBt/LkPgykI96yEWRBqO6v6ydpRbJ2oKc+TLJ44qpNBSDRfQ6QL7WhzgFHiRIkP8A+Qs3qNOGns5OZQAAAABJRU5ErkJggg==", "gf": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/ToAAADCElEQVR42u2cUYrkMAxExfYBcqRcPUfKAQLaxJYsKXFmlmFhYXn5aNw9qfkwhVQqyRb94bMJSJAgQf4t5C72rOdKt0W1rWTVa6VH+uf+5udE/pKfPiD/L+TFoY8RZD1X/UMW54ux6XBytTd3OATyzqEWWnoc0hZ4Gkvab+fXTiSJAAWHQL5xSC3SOF8+PeaUFRwC+X0cumTS4h89LF3BiDgE8g/0UMtbOkJQY45UtYQeAjnjUNRlH/3mg7oM5IxD5Qk2mQBqJZlYrZZdAfYWZMll2/i6LY004RRZ9Om/DfEEh0DWONSDzEWfrq5Hyjr/4NZQf6XRZyEOgXzooSjr16SkWzXmYcl8bRfWcAhkikNHrujVSzJb7SMYOa+IQyBnmrqnschb8vESfmSwYRKhqUFONHWnjwUZS14PU1G8/4GmBvmiqb3dGo16t6jXsJCGAwmHQBZNXVSz3OWRZbDdKn+r0NhbkLdcpqPxOvr2y81yrN009hZk5pBLZxnl1xDWRSN5MIJDIB/+UNdD3RoS84e2WFXzET0EchqHjuQiRss+klyn1JhyhEMgb/5QNDzGKIgHqEOiYKMuA/le27sKsoi0T1plC70OkF/kMtUy/Dp86tSMXd0uwqcGOavtbUwoj4IkXm3RLwvHmr0FWTW13EwiTc2NPGK0DPeIvQVZ9NCqdX7I9fOtBWsMg0MgJ3rITaIwFWXY1v29iEPkMpAvucxkT+q+hh4aEYl+GchZLssOUDpaFv2P0NnbwgwayLdcFsNBUtJYF9GSTg5R24N8cEgSS7wa8zmPkcvSKVjqMpBPDkVWy9pHSiMtZtXQQyBnHIpCrIyayejW387DwiGQ1R9KOUr9WH3UYPlcx06/DOR7Lss3NaRufT6emK8GYW9B1rpMNd1hZQktKrTSh8VjBDnhUJJCaWoorh6SoJTQLwP5FYdqa1Xr1FBxrOEQyCmH6kWw4z5Gn0uziX3qMpDveshFkT2382V6FC+SvQU5q8tE4nxZtoZUc7qjLgP56g9xCzxIkCD/AfI3D9LV7VDJ3oEAAAAASUVORK5CYII=", "m1": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAcIAAAHCAQAAAABUY/ToAAADDUlEQVR42u2cW4rlMAxExWQBXlK2niVlAQFPYutlx317aAYGhuOPcPOo+2EKqUpSIvWH6xCQIEGC/FvIU3Tt53ZfKdfz6zm979+HK/25Pfk890t+ukD+X8iHQ5sS5OFQo89NJOOLsunSa3t78oRDIGcOtdDS6eNsumPU1uNQJ5I0Dp0er9hbkAsOWd4yvmw95gy/4BDIb+JQV0EPh1ryulfj1UUcAvlHeqjlLc9lnTkyqiX0EMgVh7Iv++aALwO54tCwksvvAqhZsifTSRmrAuwtyCGXHX761IfaqZp5iz79mosnOARy1tRdRKsAipR137DSUH+k0acQh0DOuSzL6aSkmxuzsFQ9q+3kMpAThy5LaMVMV1zTKKVEioo1HAI566GerTxvyVYTr44UltDUID/ooZ6tPObMRUWx/geaGuRCD3lzI5pmqUS9RwkpumnsLciIQ27cE3NqkkcapU51/urQ2FuQr1wm0Xh1C6/Rp6tryeSCQyDfmlori94gc4Of6o7VpovgEMgxl6keqlFjjNr19io+oodALuOQqyDJLftIclofiqI2ewsy+7LBnPm1HqAuZ04MERGHQL45NNSkgzS5VeY2jV4HyC80tVn4LdWpUzO2T8qGOWNvQU7e3glioyB5Or9cybCp82dvQY4ckqlIVFNzI48YFW/Qsrcgsx5S0oSFLzoKMrVglWFwCOTKl0VT/pLEJq0ZiaQ4RC4DueDQYdI5T8CGjy81jYdQHwK50kP76UGm1JoPMujsozCDBnLBoWCJj1JH68MMW7wghLcHueaQSMpbIYr82lDARg+BnDlkymj6TszQSIt2CHoI5IpDYcROyS/Ye7f+9Z0i9hbk5O1tUtE7YqnJGo6efhnIT7ksfZXhSI3X/HpiEkVwCOTg7a03lsc+YgbNXpiOrge5DOSrPhRU2WNqKD49JEEpoV8G8jOHUikxFbDjbmEmH+QnDo0fgj3iNQ+fDDnouYL8qIdMFOma3i+r11CLZG9BrnyZ+LjiNpSGas3pDl8G8sv6EF+BBwkS5D9A/gYKetfZRhWHfwAAAABJRU5ErkJggg==", "b": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZoAAAGaAQAAAAAefbjOAAACZUlEQVR42u1cSXLDMAzjVA/Qk/x1PUkP8IzqiKsyvbS3BtAhjaNhDhZKAiBjWb9fQxjEIAYBBU2xda1bv0Ok73d+ee3PdLUn6Ev+sBj0P4JeiGjLDn5jY4NhiiLi+Sx2959JREAgYv/v79NXRIy+j//2pKC7YgAhInAQIQUMDw7EsgURgYoIJw5GJiQAMokITB5RwNAcBwe9JI/AQERojelk4qcXag0YROTSbBESdJ9+z42QrLx7cOpzhOAYfrnrx7NLREBUjZIFRtSP1+nni24QESg8QoWElg4/eHWoFCXNpQd5BAKPcM05TlNCcdCDUUSJISIQeESoiSucythw9XkTEZBaI8SocsysFck2efc+n1mOuBxhO5hDdVQN8ggkRCSBNEnRj+SxJSi1BorWkGCRZlunTeXcItxLIgKAR7wJzwTIThT+jjwCCBEFBxJDEllJvGAwR6CoTyk9jOx9rlWmaKg+sRBx5XTlNOKgBSN6HcYj2OlCqBr3MRjjzY0kDg6V4Ba8ewDMsgzdtqgaaW+nW8GqAYEIPemVc3OFYxIRmH6EcwbjjtLKkJ0xikAOEfH5zNKMyx5qIjueqkOrEiEiEBBhFrXblaOIkHOGijkCxY+IX3IFhagEw60IOlRAVSP6GgkQFyHJLJkjYLRGnY9oxxhdX++zM0QEhNZ4rXQqa6fraHvSxYapGsdDAUxcSHUmMnkQERDM0n/36T2M8ChUYRiFoIuNhogciPD2d+GY66ZnCZgjzJkolPN4rAi1Bh6PuGYlDnI+UYTMEkxrHE+bKfQynG0iAsyP4HPdGMQgBr0FfQNuzzja0dPJUQAAAABJRU5ErkJggg=="};
+</script>
+<div id="errlog" style="display:none"></div>
+<div class="frame">
+  <header class="brand no-print">
+    <div class="marks"><span class="mark" id="mkA">CSTS</span><span class="mark" id="mkB">LONG BRIDGE CAFÉ</span></div>
+    <div class="kick" id="kick">OKTOBERFEST ’26</div>
+  </header>
+  <main id="main">
+
+  <!-- ============ HOME ============ -->
+  <section class="view" data-view="home">
+    <p class="kicker" id="evDates">16–18 OCT 2026 · TSIM SHA TSUI</p>
+    <h1>Oktoberfest<br>Passport</h1>
+    <p class="lead">Three floors. Three stamps. One drink on us.<br><span class="zh">三層打卡集印，換一杯免費精釀。</span></p>
+
+    <div class="card">
+      <div class="pass" id="passHome"></div>
+      <div class="prog" id="progHome"></div>
+      <button class="btn cta" id="ctaHome"></button>
+      <div class="note" id="ctaNote" style="margin-top:9px"></div>
+    </div>
+
+    <div class="reward">
+      <div class="mug">🍺</div>
+      <div><b id="rewardTxt">Reward · one complimentary craft beer or house special</b>
+      <span class="zh">完成三個印章，櫃檯即場兌換贈飲一杯。</span></div>
+    </div>
+
+    <h2 class="sec">How it works</h2>
+    <div class="card steps">
+      <div class="step"><div><b>Scan &amp; answer</b>At each floor, scan the QR and tap one answer.<span class="zh">每層掃 QR，揀一個答案。</span></div></div>
+      <div class="step"><div><b>Collect 3 stamps</b>G/F, 1/F and the cellar — one stamp each.<span class="zh">地下、一樓、地庫各一印。</span></div></div>
+      <div class="step"><div><b>Claim your drink</b>Leave your contact, get a code, show it at the counter.<span class="zh">留聯絡方式，取碼即換。</span></div></div>
+    </div>
+
+    <h2 class="sec">The route</h2>
+    <div class="card">
+      <table class="floors" id="floorTable"></table>
+    </div>
+
+    <div class="foot">
+      <div class="lgl"><span class="mark" id="mkC">CSTS</span><span>×</span><span class="mark">LONG BRIDGE CAFÉ · MIDDLE ROAD</span></div>
+      <p id="pdpo">Answers live on your device only — we ask for contact details just once, at redemption. Personal data is used solely for this event and marketing you consent to; see the notice at the counter.</p>
+      <p style="margin-top:8px"><a class="plain" href="#/staff">Staff counter tool</a> · <a class="plain" href="#/qr">QR &amp; printing</a> · <a class="plain" href="#" id="resetLink">Start over</a></p>
+    </div>
+  </section>
+
+  <!-- ============ STATION ============ -->
+  <section class="view" data-view="station">
+    <p><a class="plain" href="#/home">‹ Passport</a></p>
+    <div style="margin-top:14px"><span class="zonechip" id="stChip"></span></div>
+    <div id="stBody"></div>
+  </section>
+
+  <!-- ============ CLAIM ============ -->
+  <section class="view" data-view="claim">
+    <div id="claimBody"></div>
+  </section>
+
+  <!-- ============ STAFF ============ -->
+  <section class="view" data-view="staff">
+    <p><a class="plain" href="#/home">‹ Passport</a></p>
+    <div class="tool-head"><div class="t">Counter tool</div><span class="kicker">INTERNAL</span></div>
+    <div class="toolnote">Counter demo — runs on this device. Production build reads the central lead list and prints nothing.</div>
+    <div class="card">
+      <div class="field" style="margin-top:2px">
+        <label for="codeIn">Enter redemption code</label>
+        <input type="tel" id="codeIn" inputmode="numeric" maxlength="4" placeholder="4-digit code" autocomplete="off">
+      </div>
+      <button class="btn small cta" id="lookupBtn">Look up</button>
+      <div id="lookupOut"></div>
+    </div>
+    <h2 class="sec">Tonight at a glance</h2>
+    <div class="card" id="statsCard"></div>
+    <h2 class="sec">Leads</h2>
+    <div class="card" id="leadsCard"></div>
+    <div class="backline"><button class="btn ghost small" id="seedBtn">Add demo leads (for walkthrough)</button></div>
+  </section>
+
+  <!-- ============ QR ============ -->
+  <section class="view" data-view="qr">
+    <p><a class="plain" href="#/home">‹ Passport</a></p>
+    <div class="tool-head"><div class="t">QR codes &amp; standees</div><span class="kicker">OPS</span></div>
+    <div class="toolnote">Print each sheet A4. Codes point at this page — regenerate if the hosting URL changes. <button class="btn ghost small" style="margin-top:10px" onclick="window.print()">Print all standees</button></div>
+    <div class="qrbox" id="qrGrid"></div>
+  </section>
+
+  </main>
+</div>
+
+<!-- ============ PRINT SHEETS ============ -->
+<div class="printables" id="sheets"></div>
+
+<script>
+/* ================= CONFIG ================= */
+const BRAND = { partner:"CSTS", venue:"Long Bridge Café", venueZh:"LONG BRIDGE CAFÉ",
+  event:"Oktoberfest Passport", dates:"16–18 OCT 2026 · TSIM SHA TSUI",
+  reward:"Reward · one complimentary craft beer or house special" };
+const STATIONS = [
+ { id:"gf", floor:"G/F", code:"Ⅰ", name:"The Welcome Bar", zh:"地下 · 迎賓酒吧",
+   brief:"Start here — pour your first stamp.", briefZh:"由呢度開始，蓋第一個印。",
+   q:"First pour — which brew is you?", qZh:"你的第一杯，會是？",
+   opts:[
+     {k:"helles", en:"Helles — crisp & easy", zh:"清爽易飲", tag:"Helles"},
+     {k:"ipa",   en:"IPA — hoppy & bold", zh:"香氣大膽", tag:"IPA"},
+     {k:"dunkel",en:"Dunkel — dark & smooth", zh:"深色順滑", tag:"Dunkel"}]},
+ { id:"m1", floor:"1/F", code:"Ⅱ", name:"The Gallery Lounge", zh:"一樓 · 沙龍",
+   brief:"One floor up, one conversation deeper.", briefZh:"上一層，傾深一層。",
+   q:"Over a pint, which topic pulls you in?", qZh:"一杯之下，你想聊哪個話題？",
+   opts:[
+     {k:"markets", en:"Where markets are heading", zh:"市場大勢", tag:"Markets"},
+     {k:"legacy",  en:"Protecting what you've built", zh:"家業傳承", tag:"Legacy"},
+     {k:"alts",    en:"Collectibles & alternatives", zh:"另類資產", tag:"Alternatives"}]},
+ { id:"b", floor:"B", code:"Ⅲ", name:"The Beer Cellar", zh:"地庫 · 酒窖",
+   brief:"Down the stairs, the good stuff waits.", briefZh:"落樓梯，好嘢喺下面。",
+   q:"Your kind of evening?", qZh:"你喜歡的夜晚是？",
+   opts:[
+     {k:"events", en:"Live jazz & tastings", zh:"爵士品酒夜", tag:"Events"},
+     {k:"quiet",  en:"A quiet corner", zh:"靜角深談", tag:"1-on-1"},
+     {k:"mingle", en:"A room full of new faces", zh:"結識新朋友", tag:"Mingler"}]}
+];
+const OPENERS = { Markets:"Open with their market view, then mention the quarterly outlook session.",
+  Legacy:"Succession & protection stories land — invite to the private legacy talk.",
+  Alternatives:"Talk collectibles — whisky, watches — invite to the cellar tasting.",
+  Events:"Invite to the next tasting night, encourage bringing a friend.",
+  "1-on-1":"Offer a quiet-table chat rather than a crowd event.",
+  Mingler:"Invite to the members' mingle — introductions are the hook." };
+const KEY = "lbrally_v1";
+
+/* ================= STORE ================= */
+function load(){ try{ return JSON.parse(localStorage.getItem(KEY)) || {stamps:{},lead:null}; }catch(e){ return {stamps:{},lead:null}; } }
+function save(d){ localStorage.setItem(KEY, JSON.stringify(d)); }
+function data(){ return load(); }
+function stampCount(d){ d=d||data(); return STATIONS.filter(s=>d.stamps[s.id]).length; }
+function complete(d){ return stampCount(d)===3; }
+function couponCode(name, phone){
+  const s=(name.trim().toLowerCase()+":"+phone.trim()); let h=7;
+  for(let i=0;i<s.length;i++){ h=(h*31+s.charCodeAt(i))>>>0; }
+  return String(h%10000).padStart(4,"0");
+}
+function leads(){ try{ return JSON.parse(localStorage.getItem(KEY+"_leads"))||[]; }catch(e){ return []; } }
+function saveLeads(a){ localStorage.setItem(KEY+"_leads", JSON.stringify(a)); }
+
+/* ================= PASSPORT RENDER ================= */
+function passHTML(d, activeId){
+  d = d||data();
+  return STATIONS.map(s=>{
+    const st=d.stamps[s.id];
+    const now = (!st && activeId===s.id) ? `<div class="now">YOU ARE HERE</div>` : (st?`<div class="now" style="color:var(--ok)">STAMPED</div>`:`<div class="now" style="color:oklch(75% .03 70)">—</div>`);
+    return `<div class="seal ${st?'done':''}">
+      <div class="disc">${s.code}</div>
+      <div class="floor">${s.floor}<br><span style="font-weight:400;letter-spacing:0;text-transform:none">${s.name}</span></div>${now}</div>`;
+  }).join("");
+}
+function mountPassport(){
+  const d=data();
+  document.getElementById("passHome").innerHTML = passHTML(d);
+  const n=stampCount(d);
+  document.getElementById("progHome").innerHTML = n<3
+    ? `<b>${n} of 3</b> stamps collected · missing: ${STATIONS.filter(s=>!d.stamps[s.id]).map(s=>s.floor+" "+s.name).join(", ")}`
+    : `<b>Passport complete</b> — your drink is waiting at the counter.`;
+  const cta=document.getElementById("ctaHome"), note=document.getElementById("ctaNote");
+  if(d.lead){ cta.textContent="Show my redemption code"; cta.onclick=()=>location.hash="#/claim"; note.textContent="Saved on this device — valid tonight."; }
+  else if(n===0){ cta.textContent="Begin at Station Ⅰ — G/F Welcome Bar"; cta.onclick=()=>location.hash="#/s/gf"; note.textContent="No sign-up needed to play."; }
+  else if(n<3){ const nx=STATIONS.find(s=>!d.stamps[s.id]); cta.textContent=`Continue → ${nx.floor} ${nx.name}`; cta.onclick=()=>location.hash="#/s/"+nx.id; note.textContent="One more tap per floor."; }
+  else { cta.textContent="Claim your free drink →"; cta.onclick=()=>location.hash="#/claim"; note.textContent="Takes 30 seconds."; }
+}
+
+/* ================= ROUTER ================= */
+const views=document.querySelectorAll(".view");
+function show(name){ views.forEach(v=>v.classList.toggle("on", v.dataset.view===name)); window.scrollTo(0,0); }
+function route(){
+  const h=location.hash||"#/home";
+  let m;
+  if((m=h.match(/^#\/s\/(\w+)$/)) && STATIONS.some(s=>s.id===m[1])){ show("station"); renderStation(m[1]); }
+  else if(h==="#/claim"){ show("claim"); renderClaim(); }
+  else if(h==="#/staff"){ show("staff"); renderStaff(); }
+  else if(h==="#/qr"){ show("qr"); renderQR(); }
+  else { show("home"); mountPassport(); }
+}
+window.addEventListener("hashchange", route);
+
+/* ================= STATION ================= */
+function renderStation(id){
+  const s=STATIONS.find(x=>x.id===id), d=data(), st=d.stamps[id];
+  document.getElementById("stChip").textContent=`STATION ${s.code} · ${s.floor}`;
+  const body=document.getElementById("stBody");
+  if(st){
+    const opt=s.opts.find(o=>o.k===st.k), nx=STATIONS[STATIONS.indexOf(s)+1];
+    body.innerHTML=`
+      <h1>${s.name}</h1>
+      <p class="lead">${s.zh}</p>
+      <div class="card">
+        <div class="pass">${passHTML(d,id)}</div>
+        <div class="stamped-answer" style="margin-top:14px">Stamp collected · you chose <b>${opt.tag}</b> — ${opt.en}</div>
+        ${nx?`<button class="btn cta" onclick="location.hash='#/s/${nx.id}'">Next → ${nx.floor} ${nx.name}</button>`
+            :`<button class="btn cta" onclick="location.hash='#/claim'">All 3 stamps — claim your drink →</button>`}
+      </div>`;
+    return;
+  }
+  body.innerHTML=`
+    <h1>${s.name}</h1>
+    <p class="lead">${s.brief||s.zh}<br><span class="zh">${s.briefZh||""}</span></p>
+    <div class="card">
+      <p class="q">${s.q}<br><span class="zh" style="font-family:inherit">${s.qZh}</span></p>
+      <div class="opts">${s.opts.map(o=>`
+        <button class="opt" data-k="${o.k}" data-id="${id}">
+          <span class="tag">${o.tag}</span>
+          <span class="en">${o.en}</span><span class="zh">${o.zh}</span>
+        </button>`).join("")}
+      </div>
+      <div class="note" style="margin-top:14px">Answers stay on your device — no personal data needed to play.</div>
+    </div>`;
+  body.querySelectorAll(".opt").forEach(btn=>btn.addEventListener("click",()=>stamp(id, btn.dataset.k)));
+}
+function stamp(id,k){
+  const d=data(); d.stamps[id]={k, t:Date.now()}; save(d);
+  const s=STATIONS.find(x=>x.id===id);
+  const ov=document.createElement("div"); ov.className="thud"; ov.innerHTML=`<div class="disc">${s.code}</div>`;
+  document.body.appendChild(ov);
+  requestAnimationFrame(()=>ov.classList.add("go"));
+  setTimeout(()=>{ ov.remove(); renderStation(id); }, 850);
+}
+
+/* ================= CLAIM ================= */
+function renderClaim(){
+  const d=data(), out=document.getElementById("claimBody");
+  if(!complete(d)){
+    const miss=STATIONS.filter(s=>!d.stamps[s.id]);
+    out.innerHTML=`
+      <p><a class="plain" href="#/home">‹ Passport</a></p>
+      <h1>Not so fast</h1>
+      <p class="lead">Your passport needs all three stamps first.<br><span class="zh">集齊三個印先可以換。</span></p>
+      <div class="card"><div class="pass">${passHTML(d)}</div>
+        <button class="btn cta" onclick="location.hash='#/s/${miss[0].id}'">Go to ${miss[0].floor} ${miss[0].name} →</button>
+      </div>`;
+    return;
+  }
+  if(d.lead){ renderCoupon(out, d.lead); return; }
+  const tags=STATIONS.map(s=>s.opts.find(o=>o.k===d.stamps[s.id].k).tag);
+  out.innerHTML=`
+    <p><a class="plain" href="#/home">‹ Passport</a></p>
+    <h1>Almost there —<br>one drink on us</h1>
+    <p class="lead">Three stamps, done. Leave a contact and your code appears.<br><span class="zh">留個聯絡，即刻出兌換碼。</span></p>
+    <div class="card">
+      <div class="pass">${passHTML(d)}</div>
+      <form id="leadForm" novalidate>
+        <div class="field" id="fName"><label for="inName">Name 姓名 *</label>
+          <input type="text" id="inName" autocomplete="name" placeholder="Chan Tai Man">
+          <div class="ferr">Please tell us your name.</div></div>
+        <div class="field" id="fPhone"><label for="inPhone">Mobile 手機 *</label>
+          <input type="tel" id="inPhone" inputmode="numeric" autocomplete="tel" placeholder="12345678" maxlength="8">
+          <div class="ferr">8-digit Hong Kong mobile, digits only.</div></div>
+        <div class="field"><label for="inEmail">Email (optional 電郵)</label>
+          <input type="email" id="inEmail" autocomplete="email" placeholder="you@example.com"></div>
+        <div class="field"><label>Preferred contact 首選聯絡 *</label>
+          <div class="seg">
+            <label><input type="radio" name="pref" value="WhatsApp" checked><span>WhatsApp</span></label>
+            <label><input type="radio" name="pref" value="Call"><span>Call</span></label>
+            <label><input type="radio" name="pref" value="Email"><span>Email</span></label>
+          </div></div>
+        <label class="consent" id="fConsent"><input type="checkbox" id="inConsent">
+          <p>I agree that ${BRAND.partner} and ${BRAND.venue} may use these details to send me event news and offers (PDPO). Opt out anytime. *</p></label>
+        <button class="btn cta" type="submit">Get my redemption code</button>
+      </form>
+    </div>`;
+  document.getElementById("leadForm").addEventListener("submit",e=>{
+    e.preventDefault();
+    const name=document.getElementById("inName").value.trim();
+    const phone=document.getElementById("inPhone").value.trim();
+    const email=document.getElementById("inEmail").value.trim();
+    const pref=document.querySelector('input[name=pref]:checked').value;
+    const okName=!!name, okPhone=/^\d{8}$/.test(phone), okC=document.getElementById("inConsent").checked;
+    document.getElementById("fName").classList.toggle("bad",!okName);
+    document.getElementById("fPhone").classList.toggle("bad",!okPhone);
+    document.getElementById("fConsent").classList.toggle("bad",!okC);
+    if(!(okName&&okPhone&&okC)) return;
+    const lead={name, phone, email, pref, consent:true, ts:Date.now(), answers:tags.slice(), code:couponCode(name,phone), redeemed:null};
+    d.lead=lead; save(d);
+    const a=leads(); a.push(lead); saveLeads(a);
+    renderCoupon(out, lead);
+  });
+}
+function renderCoupon(out, lead){
+  out.innerHTML=`
+    <h1>Cheers to you 🍻</h1>
+    <p class="lead">Show this code at the counter for your drink.<br><span class="zh">出示此碼，即場換飲品一杯。</span></p>
+    <div class="coupon">
+      <div class="lbl">REDEMPTION CODE</div>
+      <div class="code">${lead.code}</div>
+      <div class="sub">One craft beer or house special · valid tonight till 23:00</div>
+    </div>
+    <div class="chips">${lead.answers.map(t=>`<span class="chip">${t}</span>`).join("")}</div>
+    <p class="muted">We'll say hi via ${lead.pref}${lead.email?" ("+lead.email+")":""} about future tastings — opt out anytime. Tonight only, we promise not to overdo it.</p>
+    <div class="backline"><button class="btn ghost small" id="againBtn">Start over</button></div>`;
+  document.getElementById("againBtn").onclick=resetAll;
+}
+function resetAll(e){ if(e) e.preventDefault();
+  localStorage.removeItem(KEY); localStorage.removeItem(KEY+"_leads"); route(); }
+
+/* ================= STAFF ================= */
+function renderStaff(){
+  const outL=document.getElementById("lookupOut");
+  document.getElementById("lookupBtn").onclick=()=>{
+    const c=document.getElementById("codeIn").value.trim();
+    const a=leads(); const l=a.find(x=>x.code===c);
+    if(!l){ outL.innerHTML=`<p class="muted" style="color:var(--err)">No lead with code ${c||"—"} on this device.</p>`; return; }
+    outL.innerHTML=leadCard(l);
+    const mb=outL.querySelector(".markBtn");
+    if(mb) mb.onclick=()=>{ const arr=leads(); const t=arr.find(x=>x.code===c); t.redeemed=Date.now(); saveLeads(arr); renderStaff(); document.getElementById("codeIn").value=c; document.getElementById("lookupBtn").click(); };
+  };
+  const a=leads();
+  const stat=Object.keys(OPENERS).map(k=>({k,n:a.filter(l=>l.answers.includes(k)).length}));
+  const mx=Math.max(1,...stat.map(s=>s.n));
+  document.getElementById("statsCard").innerHTML=`
+    <div class="row" style="justify-content:space-between"><div><b style="font-size:22px">${a.length}</b> <span class="note">leads</span></div>
+    <div><b style="font-size:22px">${a.filter(l=>l.redeemed).length}</b> <span class="note">redeemed</span></div>
+    <div><b style="font-size:22px">${a.filter(l=>l.answers.includes("Legacy")||l.answers.includes("Markets")||l.answers.includes("Alternatives")).length}</b> <span class="note">wealth-topic leads</span></div></div>
+    <hr class="sp">
+    ${stat.filter(s=>s.n>0).map(s=>`<div class="statbar"><span style="min-width:86px">${s.k}</span><div class="bar"><i style="width:${100*s.n/mx}%"></i></div><b>${s.n}</b></div>`).join("")||'<p class="note">No answers yet.</p>'}`;
+  document.getElementById("leadsCard").innerHTML = a.length
+    ? `<table class="kv">${a.slice().reverse().map(l=>`<tr><td>${new Date(l.ts).toLocaleTimeString([], {hour:"2-digit",minute:"2-digit"})}</td>
+        <td><b>${esc(l.name)}</b> · ${esc(l.phone)}<br><span class="note">${l.answers.join(" · ")}</span><br>
+        ${l.redeemed?`<span class="redeemed">REDEEMED</span>`:`<span class="note">code ${l.code}</span>`}</td></tr>`).join("")}</table>`
+    : `<p class="note">No leads yet on this device.</p>`;
+  document.getElementById("seedBtn").onclick=()=>{
+    const demo=[
+      ["Ada Cheng","91234567",["Dunkel","Legacy","1-on-1"]],
+      ["Marcus Ho","98765432",["IPA","Markets","Mingler"]],
+      ["Vivian Lau","96021111",["Helles","Alternatives","Events"]],
+      ["Jason Wong","95553322",["IPA","Legacy","Events"]],
+      ["Cynthia Cheung","94448877",["Dunkel","Markets","1-on-1"]],
+      ["Kelvin Ng","93332211",["Helles","Alternatives","Mingler"]]];
+    const a=leads();
+    demo.forEach(([n,p,ans],i)=>{ if(a.some(l=>l.phone===p)) return;
+      a.push({name:n,phone:p,email:"",pref:"WhatsApp",consent:true,ts:Date.now()-i*9e5,answers:ans,code:couponCode(n,p),redeemed:i%3===0?Date.now():null}); });
+    saveLeads(a); renderStaff();
+  };
+}
+function leadCard(l){
+  const ops=l.answers.map(t=>OPENERS[t]).filter(Boolean);
+  return `<hr class="sp"><table class="kv">
+    <tr><td>Name</td><td><b>${esc(l.name)}</b> ${l.redeemed?'<span class="redeemed">REDEEMED</span>':""}</td></tr>
+    <tr><td>Contact</td><td>${esc(l.phone)} · ${l.pref}${l.email?" · "+esc(l.email):""}</td></tr>
+    <tr><td>Answers</td><td>${l.answers.map(t=>`<span class="chip" style="display:inline-block;margin:1px 4px 1px 0">${t}</span>`).join("")}</td></tr>
+    <tr><td>Opener</td><td class="note">${ops[0]||"—"}</td></tr></table>
+    ${l.redeemed?"":'<button class="btn small cta markBtn">Mark redeemed</button>'}`;
+}
+function esc(s){ return String(s).replace(/[&<>"']/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+/* ================= QR ================= */
+const BASE = location.href.replace(/#.*$/,"");
+function renderQR(){
+  const grid=document.getElementById("qrGrid");
+  const items=[{id:"home",floor:"POSTER",name:"Event entrance QR",url:BASE+"#/home"}]
+    .concat(STATIONS.map(s=>({id:s.id,floor:s.floor,name:`${s.name} — ${s.zh}`,url:BASE+"#/s/"+s.id})));
+  grid.innerHTML=items.map(it=>`
+    <div class="qrcard" data-qr="${it.id}">
+      <div class="ph">QR PENDING — regenerate after final hosting</div>
+      <b>${it.floor} · ${it.name}</b>
+      <span class="u">${it.url}</span>
+    </div>`).join("");
+  document.getElementById("sheets").innerHTML=items.map(it=>`
+    <div class="sheet" data-sheet="${it.id}">
+      <div><div class="sk">OKTOBERFEST PASSPORT · ${it.floor}</div>
+      <div class="sh">Scan.<br>Answer.<br>Collect the stamp.</div></div>
+      <div class="ph2" data-qrbig="${it.id}"></div>
+      <div class="inst"><b>3 stamps = 1 free craft beer</b><br>地下 · 一樓 · 地庫各掃一次<br>Collect all three floors, then show your code at the counter.</div>
+      <div class="ft">${BRAND.partner} × ${BRAND.venue} · MIDDLE ROAD, TSIM SHA TSUI · 16–18 OCT 2026</div>
+    </div>`).join("");
+  /* QR placeholders get replaced by embedded PNGs (data-URI) at build time */
+  if(typeof EMBEDDED_QR!=="undefined"){
+    items.forEach(it=>{
+      const png=EMBEDDED_QR[it.id];
+      if(!png) return;
+      const c=grid.querySelector(`[data-qr="${it.id}"] .ph`); if(c) c.outerHTML=`<img alt="QR ${it.name}" src="${png}">`;
+      const b=document.querySelector(`[data-sheet="${it.id}"] [data-qrbig="${it.id}"]`); if(b) b.innerHTML=`<img alt="" src="${png}">`;
+    });
+  }
+}
+
+/* ================= INIT ================= */
+document.getElementById("resetLink").addEventListener("click",e=>{e.preventDefault(); if(confirm("Clear stamps and start over?")) resetAll();});
+window.addEventListener("error",e=>{ const el=document.getElementById("errlog"); el.style.display="block"; el.textContent+="ERR: "+e.message+"\n"; });
+route();
+</script>
+</body>
+</html>
